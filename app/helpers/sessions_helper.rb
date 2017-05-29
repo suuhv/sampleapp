@@ -24,7 +24,6 @@ module SessionsHelper
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
       if user && user.authenticated?(:remember, cookies[:remember_token])
-
         log_in user
         @current_user = user
       end
@@ -39,7 +38,6 @@ module SessionsHelper
 
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
-
     !current_user.nil?
   end
 
@@ -57,3 +55,4 @@ module SessionsHelper
     @current_user = nil
   end
 end
+
