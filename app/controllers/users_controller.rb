@@ -18,9 +18,6 @@ class UsersController < ApplicationController
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
     else
       render 'new'
     end
@@ -40,12 +37,12 @@ class UsersController < ApplicationController
     end
   end
   def index
-    @users = User.where(activated: true).paginate(page: params[:page])
+    @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
-    redirect_to root_url and return unless Time.zone.now
+    redirect_to root_url and return unless :email
   end
 
   def destroy
